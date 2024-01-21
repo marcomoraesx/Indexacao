@@ -1,0 +1,102 @@
+#ifndef INDEXING_H
+#define INDEXING_H
+
+typedef struct estudante {
+	char nome[255];
+	char cpf[20];
+	int matricula;
+	char telefone[20];
+    char email[127];
+    char curso[50];
+    int debito;
+} dado;
+
+typedef struct indice {
+	int chave;
+	int indice;
+} tipo_dado;
+
+typedef struct no_bst{
+	tipo_dado *dado;
+	struct no_bst *esq, *dir;
+} no_bst;
+
+typedef no_bst * arvore_bst;
+
+typedef struct no_avl {
+    tipo_dado *dado;
+    int fb;
+    struct no_avl *esq, *dir;
+} no_avl;
+
+typedef no_avl * arvore_avl;
+
+enum cor { VERMELHO, PRETO, DUPLO_PRETO };
+
+typedef struct no_rb{
+    tipo_dado *dado;
+    enum cor cor;
+    struct no_rb *esq, *dir, *pai;
+} no_rb;
+
+typedef no_rb * arvore_rb;
+
+typedef struct tabela {
+	FILE *arquivo_dados;
+	arvore_bst indices_cpf;
+	arvore_avl indices_matricula;
+	arvore_rb indices_email;
+} tabela;
+
+int inicializarTabela(tabela *tab);
+void finalizar (tabela *tab);
+void adicionarEstudante(tabela *tab, dado *estudante);
+
+//BST
+void inicializar_bst(arvore_bst *raiz);
+arvore_bst adicionar_bst(tipo_dado *valor, arvore_bst raiz);
+arvore_bst remover_bst(char *valor, arvore_bst raiz);
+int altura_bst(arvore_bst raiz);
+void imprimir_elemento_bst(arvore_bst raiz, tabela * tab);
+tipo_dado * maior_elemento_bst(arvore_bst raiz);
+tipo_dado * menor_elemento_bst(arvore_bst raiz);
+void pre_order_bst(arvore_bst raiz, tabela *tab);
+void pos_order_bst(arvore_bst raiz, tabela *tab);
+void in_order_bst(arvore_bst raiz, tabela *tab);
+
+void salvar_arquivo_bst(char *nome, arvore_bst a);
+void salvar_auxiliar_bst(arvore_bst raiz, FILE *arq);
+arvore_bst carregar_arquivo_bst(char *nome, arvore_bst a);
+
+//AVL
+void inicializar_avl(arvore_avl *raiz);
+arvore_avl adicionar_avl(arvore_avl raiz, tipo_dado *valor, int *cresceu);
+arvore_avl rotacao_avl(arvore_avl pivo);
+arvore_avl rotacao_simples_esquerda_avl(arvore_avl pivo);
+arvore_avl rotacao_simples_direita_avl(arvore_avl pivo);
+arvore_avl rotacao_dupla_esquerda_avl(arvore_avl pivo);
+arvore_avl rotacao_dupla_direita_avl(arvore_avl pivo);
+arvore_avl remover_avl(arvore_avl raiz, int valor, int *caiu);
+int altura_avl(arvore_avl raiz);
+void imprimir_elemento_avl(arvore_avl raiz, tabela * tab);
+tipo_dado * maior_elemento_avl(arvore_avl raiz);
+tipo_dado * menor_elemento_avl(arvore_avl raiz);
+void pre_order_avl(arvore_avl raiz, tabela *tab);
+void pos_order_avl(arvore_avl raiz, tabela *tab);
+void in_order_avl(arvore_avl raiz, tabela *tab);
+
+void salvar_arquivo_avl(char *nome, arvore_avl a);
+void salvar_auxiliar_avl(arvore_avl raiz, FILE *arq);
+arvore_avl carregar_arquivo_avl(char *nome, arvore_avl a);
+
+//RB
+void inicializar_rb(arvore_rb *raiz);
+void adicionar_rb(tipo_dado *valor, arvore_rb *raiz);
+void remover_rb(tipo_dado *valor, arvore_rb *raiz);
+
+
+int maior(int a, int b);
+dado * ler_dados();
+void tirar_enter(char *string);
+
+#endif
