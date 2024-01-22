@@ -1,5 +1,6 @@
 #ifndef INDEXING_H
 #define INDEXING_H
+#include <stdio.h>
 
 typedef struct estudante {
 	char nome[255];
@@ -92,8 +93,30 @@ arvore_avl carregar_arquivo_avl(char *nome, arvore_avl a);
 //RB
 void inicializar_rb(arvore_rb *raiz);
 void adicionar_rb(tipo_dado *valor, arvore_rb *raiz);
-void remover_rb(tipo_dado *valor, arvore_rb *raiz);
+void ajustar_rb(arvore_rb *raiz, arvore_rb elemento);
+void rotacao_simples_esquerda_rb(arvore_rb *raiz, arvore_rb pivo);
+void rotacao_simples_direita_rb(arvore_rb *raiz, arvore_rb pivo);
+enum cor cor(arvore_rb elemento);
+int eh_raiz(arvore_rb elemento);
+int eh_filho_esquerdo(arvore_rb elemento);
+int eh_filho_direito(arvore_rb elemento);
+arvore_rb irmao(arvore_rb elemento);
+arvore_rb tio(arvore_rb elemento);
+arvore_rb avo(arvore_rb elemento);
+tipo_dado * maior_elemento_rb(arvore_rb raiz);
+tipo_dado * menor_elemento_rb(arvore_rb raiz);
+int altura_rb(arvore_rb raiz);
+void retira_duplo_preto(arvore_rb *raiz, arvore_rb elemento);
+void remover_rb(char *valor, arvore_rb *raiz);
+void reajustar_rb(arvore_rb *raiz, arvore_rb elemento);
+void imprimir_elemento_rb(arvore_rb raiz, tabela * tab);
+void pre_order_rb(arvore_rb raiz, tabela *tab);
+void pos_order_rb(arvore_rb raiz, tabela *tab);
+void in_order_rb(arvore_rb raiz, tabela *tab);
 
+void salvar_arquivo_rb(char *nome, arvore_rb a);
+void salvar_auxiliar_rb(arvore_rb raiz, FILE *arq);
+arvore_rb carregar_arquivo_rb(char *nome, arvore_rb a);
 
 int maior(int a, int b);
 dado * ler_dados();

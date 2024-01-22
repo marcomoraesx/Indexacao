@@ -17,7 +17,7 @@ arvore_avl adicionar_avl(arvore_avl raiz, tipo_dado *valor, int *cresceu){
         *cresceu = 1;
         return nova;
     } else {
-        if(valor > raiz->dado->chave) {
+        if(valor->chave > raiz->dado->chave) {
             raiz->dir = adicionar_avl(raiz->dir, valor, cresceu);
             if (*cresceu) {
                 //Atualização dos Fatores de Balanço após a árvore à direita crescer
@@ -255,31 +255,31 @@ void imprimir_elemento_avl(arvore_avl raiz, tabela * tab) {
 	dado * temp = (dado *) malloc (sizeof(dado));
    	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
 	int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-	printf("[%d, %d, %s, %s, %s ]\n", raiz->dado->chave,r, temp->titulo, temp->autor, temp->isbn);
+	printf("[%d, %d, %s, %s, %s ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email);
 	free(temp);
 }
 
-void pre_order_avl(arvore_avl raiz) {
+void pre_order_avl(arvore_avl raiz, tabela *tab) {
 	if(raiz != NULL) {
-		imprimir_elemento_avl(raiz);
-		pre_order_avl(raiz->esq);
-		pre_order_avl(raiz->dir);
+		imprimir_elemento_avl(raiz, tab);
+		pre_order_avl(raiz->esq, tab);
+		pre_order_avl(raiz->dir, tab);
 	}
 }
 
-void pos_order_avl(arvore_avl raiz) {
+void pos_order_avl(arvore_avl raiz, tabela *tab) {
 	if(raiz != NULL) {
-		pos_order_avl(raiz->esq);
-		pos_order_avl(raiz->dir);
-		imprimir_elemento_avl(raiz);
+		pos_order_avl(raiz->esq, tab);
+		pos_order_avl(raiz->dir, tab);
+		imprimir_elemento_avl(raiz, tab);
 	}
 }
 
-void in_order_avl(arvore_avl raiz) {
+void in_order_avl(arvore_avl raiz, tabela *tab) {
 	if(raiz != NULL) {
-		in_order_avl(raiz->esq);
-		imprimir_elemento_avl(raiz);
-		in_order_avl(raiz->dir);
+		in_order_avl(raiz->esq, tab);
+		imprimir_elemento_avl(raiz, tab);
+		in_order_avl(raiz->dir, tab);
 	}
 }
 

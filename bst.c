@@ -51,31 +51,31 @@ void imprimir_elemento_bst(arvore_bst raiz, tabela * tab) {
 	dado * temp = (dado *) malloc (sizeof(dado));
    	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
 	int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-	printf("[%d, %d, %s, %s, %s ]\n", raiz->dado->chave,r, temp->titulo, temp->autor, temp->isbn);
+	printf("[%s, %d, %s, %s, %s ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email);
 	free(temp);
 }
 
-void pre_order_bst(arvore_bst raiz) {
+void pre_order_bst(arvore_bst raiz, tabela *tab) {
 	if(raiz != NULL) {
-		imprimir_elemento_bst(raiz);
-		pre_order_bst(raiz->esq);
-		pre_order_bst(raiz->dir);
+		imprimir_elemento_bst(raiz, tab);
+		pre_order_bst(raiz->esq, tab);
+		pre_order_bst(raiz->dir, tab);
 	}
 }
 
-void pos_order_bst(arvore_bst raiz) {
+void pos_order_bst(arvore_bst raiz, tabela *tab) {
 	if(raiz != NULL) {
-		pos_order_bst(raiz->esq);
-		pos_order_bst(raiz->dir);
-		imprimir_elemento_bst(raiz);
+		pos_order_bst(raiz->esq, tab);
+		pos_order_bst(raiz->dir, tab);
+		imprimir_elemento_bst(raiz, tab);
 	}
 }
 
-void in_order_bst(arvore_bst raiz) {
+void in_order_bst(arvore_bst raiz, tabela *tab) {
 	if(raiz != NULL) {
-		in_order_bst(raiz->esq);
-		imprimir_elemento_bst(raiz);
-		in_order_bst(raiz->dir);
+		in_order_bst(raiz->esq, tab);
+		imprimir_elemento_bst(raiz, tab);
+		in_order_bst(raiz->dir, tab);
 	}
 }
 

@@ -5,13 +5,13 @@
 #include <string.h>
 
 int inicializarTabela(tabela *tab) {
-	inicializar(&tab->indices_cpf);
-	inicializar(&tab->indices_matricula);
-	inicializar(&tab->indices_email);
+	inicializar_bst(&tab->indices_cpf);
+	inicializar_avl(&tab->indices_matricula);
+	inicializar_rb(&tab->indices_email);
 	tab->arquivo_dados = fopen("dados.txt", "a+b");
-	tab->indices_cpf = carregar_arquivo("indices_cpf.txt", tab->indices_cpf);
-	tab->indices_matricula = carregar_arquivo("indices_matricula.txt", tab->indices_matricula);
-	tab->indices_email = carregar_arquivo("indices_email.txt", tab->indices_email);
+	tab->indices_cpf = carregar_arquivo_bst("indices_cpf.txt", tab->indices_cpf);
+	tab->indices_matricula = carregar_arquivo_avl("indices_matricula.txt", tab->indices_matricula);
+	tab->indices_email = carregar_arquivo_rb("indices_email.txt", tab->indices_email);
 	if(tab->arquivo_dados != NULL)
 		return 1;
 	else
@@ -20,9 +20,9 @@ int inicializarTabela(tabela *tab) {
 
 void finalizar (tabela *tab) {
 	fclose(tab->arquivo_dados);
-	salvar_arquivo("indices_cpf.txt", tab->indices_cpf);
-	salvar_arquivo("indices_matricula.txt", tab->indices_matricula);
-	salvar_arquivo("indices_email.txt", tab->indices_email);
+	salvar_arquivo_bst("indices_cpf.txt", tab->indices_cpf);
+	salvar_arquivo_avl("indices_matricula.txt", tab->indices_matricula);
+	salvar_arquivo_rb("indices_email.txt", tab->indices_email);
 }
 
 void adicionarEstudante(tabela *tab, dado *estudante){
@@ -33,13 +33,13 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			fwrite(estudante, sizeof(dado), 1, tab->arquivo_dados);
 			//Adicionar indice para CPF
 			novo->chave = estudante->cpf;
-			tab->indices_cpf = adicionar(novo, tab->indices_cpf);
+			tab->indices_cpf = adicionar_bst(novo, tab->indices_cpf);
 			//Adicionar indice para MATRICULA
             novo->chave = estudante->matricula;
-			tab->indices_matricula = adicionar(novo, tab->indices_matricula);
+			tab->indices_matricula = adicionar_avl(tab->indices_matricula, novo, 0);
 			//Adicionar indice para EMAIL
 			novo->chave = estudante->email;
-			adicionar(novo, tab->indices_email);
+			adicionar_rb(novo, tab->indices_email);
 	}
 }
 
