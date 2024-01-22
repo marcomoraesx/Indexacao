@@ -7,7 +7,7 @@ void inicializar_bst(arvore_bst *raiz) {
     *raiz = NULL;
 }
 
-arvore_bst adicionar_bst(tipo_dado *valor, arvore_bst raiz){
+arvore_bst adicionar_bst(index_bst *valor, arvore_bst raiz){
     if(raiz == NULL) {
         arvore_bst nova = (arvore_bst) malloc(sizeof(struct no_bst));
         nova->dado = valor;
@@ -15,7 +15,7 @@ arvore_bst adicionar_bst(tipo_dado *valor, arvore_bst raiz){
         nova->dir = NULL;
         return nova;
     } else {
-        if(strcmpi(valor->chave, raiz->dado->chave) > 0) {
+        if(strcmp(valor->chave, raiz->dado->chave) > 0) {
             raiz->dir = adicionar_bst(valor, raiz->dir);
         } else {
             raiz->esq = adicionar_bst(valor, raiz->esq);
@@ -28,7 +28,7 @@ arvore_bst remover_bst(char *valor, arvore_bst raiz) {
 	if(raiz == NULL)
 		return NULL;
 
-	if(strcmpi(valor, raiz->dado->chave)) {
+	if(strcmp(valor, raiz->dado->chave)) {
 		if(raiz->esq == NULL) {
 			return raiz->dir;
 		}
@@ -39,7 +39,7 @@ arvore_bst remover_bst(char *valor, arvore_bst raiz) {
 		raiz->esq = remover_bst(raiz->dado->chave, raiz->esq);
 		return raiz;
 	}
-	if(strcmpi(valor, raiz->dado->chave) > 0) {
+	if(strcmp(valor, raiz->dado->chave) > 0) {
 			raiz->dir = remover_bst(valor, raiz->dir);
 	} else {
 			raiz->esq = remover_bst(valor, raiz->esq);
@@ -79,7 +79,7 @@ void in_order_bst(arvore_bst raiz, tabela *tab) {
 	}
 }
 
-tipo_dado * maior_elemento_bst(arvore_bst raiz) {
+index_bst * maior_elemento_bst(arvore_bst raiz) {
 	if(raiz == NULL)
 			return NULL;
 	if(raiz->dir == NULL)
@@ -88,7 +88,7 @@ tipo_dado * maior_elemento_bst(arvore_bst raiz) {
 			return maior_elemento_bst(raiz->dir);
 }
 
-tipo_dado * menor_elemento_bst(arvore_bst raiz) {
+index_bst * menor_elemento_bst(arvore_bst raiz) {
 	if(raiz == NULL)
 			return NULL;
 	if(raiz->esq == NULL)
@@ -115,7 +115,7 @@ void salvar_arquivo_bst(char *nome, arvore_bst a) {
 
 void salvar_auxiliar_bst(arvore_bst raiz, FILE *arq){
 	if(raiz != NULL) {
-		fwrite(raiz->dado, sizeof(tipo_dado), 1, arq);
+		fwrite(raiz->dado, sizeof(index_bst), 1, arq);
 		salvar_auxiliar_bst(raiz->esq, arq);
 		salvar_auxiliar_bst(raiz->dir, arq);
 	}
@@ -124,12 +124,12 @@ void salvar_auxiliar_bst(arvore_bst raiz, FILE *arq){
 arvore_bst carregar_arquivo_bst(char *nome, arvore_bst a) {
 	FILE *arq;
 	arq = fopen(nome, "rb");
-	tipo_dado * temp;
+	index_bst * temp;
 	if(arq != NULL) {
-		temp = (tipo_dado *) malloc(sizeof(tipo_dado));
-		while(fread(temp, sizeof(tipo_dado), 1, arq)) {
+		temp = (index_bst *) malloc(sizeof(index_bst));
+		while(fread(temp, sizeof(index_bst), 1, arq)) {
             a = adicionar_bst(temp, a);
-			temp = (tipo_dado *) malloc(sizeof(tipo_dado));
+			temp = (index_bst *) malloc(sizeof(index_bst));
 		}
 		fclose(arq);
 	}

@@ -27,19 +27,31 @@ void finalizar (tabela *tab) {
 
 void adicionarEstudante(tabela *tab, dado *estudante){
 	if(tab->arquivo_dados != NULL) {
-			tipo_dado * novo = (tipo_dado *) malloc(sizeof(tipo_dado));
+			index_bst * novo_bst = (index_bst *) malloc(sizeof(index_bst));
+			index_avl * novo_avl = (index_avl *) malloc(sizeof(index_avl));
+			index_rb * novo_rb = (index_rb *) malloc(sizeof(index_rb));
+
 			fseek(tab->arquivo_dados, 0L, SEEK_END);
-			novo->indice = ftell(tab->arquivo_dados);
-			fwrite(estudante, sizeof(dado), 1, tab->arquivo_dados);
+
 			//Adicionar indice para CPF
-			novo->chave = estudante->cpf;
-			tab->indices_cpf = adicionar_bst(novo, tab->indices_cpf);
+			novo_bst->indice = ftell(tab->arquivo_dados);
 			//Adicionar indice para MATRICULA
-            novo->chave = estudante->matricula;
-			tab->indices_matricula = adicionar_avl(tab->indices_matricula, novo, 0);
+			novo_avl->indice = ftell(tab->arquivo_dados);
 			//Adicionar indice para EMAIL
-			novo->chave = estudante->email;
-			adicionar_rb(novo, tab->indices_email);
+			novo_rb->indice = ftell(tab->arquivo_dados);
+
+			fwrite(estudante, sizeof(dado), 1, tab->arquivo_dados);
+
+			//Adicionar chave para CPF
+			strcpy(novo_bst->chave, estudante->cpf);
+			tab->indices_cpf = adicionar_bst(novo_bst, tab->indices_cpf);
+			//Adicionar chave para MATRICULA
+            novo_avl->chave = estudante->matricula;
+            int cresceu = 0;
+			tab->indices_matricula = adicionar_avl(tab->indices_matricula, novo_avl, &cresceu);
+			//Adicionar chave para EMAIL
+			strcpy(novo_rb->chave, estudante->email);
+			adicionar_rb(novo_rb, tab->indices_email);
 	}
 }
 
@@ -52,7 +64,14 @@ int maior(int a, int b) {
 
 dado * ler_dados() {
 	dado *novo = (dado *) malloc(sizeof(dado));
-	//__fpurge(stdin);
+	strcpy(novo->nome, "Marco");
+	strcpy(novo->cpf, "345345345");
+	novo->debito = 0;
+	strcpy(novo->email, "marcomoraes");
+	strcpy(novo->telefone, "45634534");
+	novo->matricula = 234234;
+
+	/*//__fpurge(stdin);
 	getchar();
 	printf("Nome: ");
 	fgets(novo->nome, 255,  stdin);
@@ -62,6 +81,7 @@ dado * ler_dados() {
 	tirar_enter(novo->cpf);
 	printf("Matricula: ");
 	scanf("%d", &novo->matricula);
+	__fpurge(stdin);
 	printf("Telefone: ");
 	fgets(novo->telefone, 20,  stdin);
 	tirar_enter(novo->telefone);
@@ -73,6 +93,7 @@ dado * ler_dados() {
 	tirar_enter(novo->curso);
 	printf("Débito: ");
 	scanf("%d", &novo->debito);
+	*/
 	return novo;
 }
 

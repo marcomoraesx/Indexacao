@@ -5,19 +5,21 @@
 
 arvore_rb no_null;
 
-void inicializar(arvore_rb *raiz) {
+void inicializar_rb(arvore_rb *raiz) {
     *raiz = NULL;
     no_null = (arvore_rb) malloc(sizeof(struct no_rb));
     no_null->cor = DUPLO_PRETO;
-    no_null->dado->chave = 0;
+    //strcpy(no_null->dado->chave, "");
+    //no_null->dado->indice = 0;
     no_null->esq = NULL;
     no_null->dir = NULL;
     no_null->pai = NULL;
 }
 
-void adicionar_rb(tipo_dado *valor, arvore_rb *raiz){
+void adicionar_rb(index_rb *valor, arvore_rb *raiz){
+    //AJEITAR FUNCAO DE ADICIONARRRRR
     arvore_rb posicao, pai, novo;
-    posicao = *raiz;
+    posicao = raiz;
     pai = NULL;
     while(posicao != NULL) {
         pai = posicao;
@@ -182,7 +184,7 @@ int altura_rb(arvore_rb raiz) {
 	return 1 + maior(altura_rb(raiz->dir), altura_rb(raiz->esq));
 }
 
-tipo_dado * maior_elemento_rb(arvore_rb raiz) {
+index_rb * maior_elemento_rb(arvore_rb raiz) {
 	if(raiz == NULL)
 			return NULL;
 	if(raiz->dir == NULL)
@@ -191,7 +193,7 @@ tipo_dado * maior_elemento_rb(arvore_rb raiz) {
 			return maior_elemento_rb(raiz->dir);
 }
 
-tipo_dado * menor_elemento_rb(arvore_rb raiz) {
+index_rb * menor_elemento_rb(arvore_rb raiz) {
 	if(raiz == NULL)
 			return NULL;
 	if(raiz->esq == NULL)
@@ -406,7 +408,7 @@ void salvar_arquivo_rb(char *nome, arvore_rb a) {
 
 void salvar_auxiliar_rb(arvore_rb raiz, FILE *arq){
 	if(raiz != NULL) {
-		fwrite(raiz->dado, sizeof(tipo_dado), 1, arq);
+		fwrite(raiz->dado, sizeof(index_rb), 1, arq);
 		salvar_auxiliar_rb(raiz->esq, arq);
 		salvar_auxiliar_rb(raiz->dir, arq);
 	}
@@ -415,12 +417,12 @@ void salvar_auxiliar_rb(arvore_rb raiz, FILE *arq){
 arvore_rb carregar_arquivo_rb(char *nome, arvore_rb a) {
 	FILE *arq;
 	arq = fopen(nome, "rb");
-	tipo_dado * temp;
+	index_rb * temp;
 	if(arq != NULL) {
-		temp = (tipo_dado *) malloc(sizeof(tipo_dado));
-		while(fread(temp, sizeof(tipo_dado), 1, arq)) {
-            adicionar_rb(temp, a);
-			temp = (tipo_dado *) malloc(sizeof(tipo_dado));
+		temp = (index_rb *) malloc(sizeof(index_rb));
+		while(fread(temp, sizeof(index_rb), 1, arq)) {
+            adicionar_rb(temp, &a);
+			temp = (index_rb *) malloc(sizeof(index_rb));
 		}
 		fclose(arq);
 	}

@@ -7,7 +7,7 @@ void inicializar_avl(arvore_avl *raiz) {
     *raiz = NULL;
 }
 
-arvore_avl adicionar_avl(arvore_avl raiz, tipo_dado *valor, int *cresceu){
+arvore_avl adicionar_avl(arvore_avl raiz, index_avl *valor, int *cresceu){
     if(raiz == NULL) {
         arvore_avl nova = (arvore_avl) malloc(sizeof(struct no_avl));
         nova->dado = valor;
@@ -283,7 +283,7 @@ void in_order_avl(arvore_avl raiz, tabela *tab) {
 	}
 }
 
-tipo_dado * maior_elemento_avl(arvore_avl raiz) {
+index_avl * maior_elemento_avl(arvore_avl raiz) {
 	if(raiz == NULL)
 			return NULL;
 	if(raiz->dir == NULL)
@@ -292,7 +292,7 @@ tipo_dado * maior_elemento_avl(arvore_avl raiz) {
 			return maior_elemento_avl(raiz->dir);
 }
 
-tipo_dado * menor_elemento_avl(arvore_avl raiz) {
+index_avl * menor_elemento_avl(arvore_avl raiz) {
 	if(raiz == NULL)
 			return NULL;
 	if(raiz->esq == NULL)
@@ -319,7 +319,7 @@ void salvar_arquivo_avl(char *nome, arvore_avl a) {
 
 void salvar_auxiliar_avl(arvore_avl raiz, FILE *arq){
 	if(raiz != NULL) {
-		fwrite(raiz->dado, sizeof(tipo_dado), 1, arq);
+		fwrite(raiz->dado, sizeof(index_avl), 1, arq);
 		salvar_auxiliar_avl(raiz->esq, arq);
 		salvar_auxiliar_avl(raiz->dir, arq);
 	}
@@ -328,12 +328,13 @@ void salvar_auxiliar_avl(arvore_avl raiz, FILE *arq){
 arvore_avl carregar_arquivo_avl(char *nome, arvore_avl a) {
 	FILE *arq;
 	arq = fopen(nome, "rb");
-	tipo_dado * temp;
+	index_avl * temp;
 	if(arq != NULL) {
-		temp = (tipo_dado *) malloc(sizeof(tipo_dado));
-		while(fread(temp, sizeof(tipo_dado), 1, arq)) {
-            a = adicionar_avl(a, temp, 0);
-			temp = (tipo_dado *) malloc(sizeof(tipo_dado));
+		temp = (index_avl *) malloc(sizeof(index_avl));
+		while(fread(temp, sizeof(index_avl), 1, arq)) {
+            int cresceu = 0;
+            a = adicionar_avl(a, temp, &cresceu);
+			temp = (index_avl *) malloc(sizeof(index_avl));
 		}
 		fclose(arq);
 	}
