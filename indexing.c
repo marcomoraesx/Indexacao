@@ -8,10 +8,10 @@ int inicializarTabela(tabela *tab) {
 	inicializar_bst(&tab->indices_cpf);
 	inicializar_avl(&tab->indices_matricula);
 	inicializar_rb(&tab->indices_email);
-	tab->arquivo_dados = fopen("dados.txt", "a+b");
-	tab->indices_cpf = carregar_arquivo_bst("indices_cpf.txt", tab->indices_cpf);
-	tab->indices_matricula = carregar_arquivo_avl("indices_matricula.txt", tab->indices_matricula);
-	tab->indices_email = carregar_arquivo_rb("indices_email.txt", tab->indices_email);
+	tab->arquivo_dados = fopen("dados.ext", "a+b");
+	tab->indices_cpf = carregar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
+	tab->indices_matricula = carregar_arquivo_avl("indices_matricula.ext", tab->indices_matricula);
+	tab->indices_email = carregar_arquivo_rb("indices_email.ext", tab->indices_email);
 	if(tab->arquivo_dados != NULL)
 		return 1;
 	else
@@ -20,9 +20,9 @@ int inicializarTabela(tabela *tab) {
 
 void finalizar (tabela *tab) {
 	fclose(tab->arquivo_dados);
-	salvar_arquivo_bst("indices_cpf.txt", tab->indices_cpf);
-	salvar_arquivo_avl("indices_matricula.txt", tab->indices_matricula);
-	salvar_arquivo_rb("indices_email.txt", tab->indices_email);
+	salvar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
+	salvar_arquivo_avl("indices_matricula.ext", tab->indices_matricula);
+	salvar_arquivo_rb("indices_email.ext", tab->indices_email);
 }
 
 void adicionarEstudante(tabela *tab, dado *estudante){
@@ -51,7 +51,7 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			tab->indices_matricula = adicionar_avl(tab->indices_matricula, novo_avl, &cresceu);
 			//Adicionar chave para EMAIL
 			strcpy(novo_rb->chave, estudante->email);
-			adicionar_rb(novo_rb, tab->indices_email);
+			adicionar_rb(novo_rb, &tab->indices_email);
 	}
 }
 

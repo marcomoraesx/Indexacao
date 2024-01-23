@@ -63,6 +63,19 @@ int inicializarTabela(tabela *tab);
 void finalizar (tabela *tab);
 void adicionarEstudante(tabela *tab, dado *estudante);
 
+//Falta fazer
+void removerEstudantePeloCpf(tabela *tab, char *valor);
+void removerEstudantePelaMatricula(tabela *tab, int valor);
+void removerEstudantePeloEmail(tabela *tab, char *valor);
+
+void buscarEstudantePeloCpf(tabela *tab, char *valor);
+void buscarEstudantePelaMatricula(tabela *tab, int valor);
+void buscarEstudantePeloEmail(tabela *tab, char *valor);
+
+void ordenarEstudantesPeloCpf(tabela *tab);
+void ordenarEstudantesPelaMatricula(tabela *tab);
+void ordenarEstudantesPeloEmail(tabela *tab);
+
 //BST
 void inicializar_bst(arvore_bst *raiz);
 arvore_bst adicionar_bst(index_bst *valor, arvore_bst raiz);

@@ -17,9 +17,8 @@ void inicializar_rb(arvore_rb *raiz) {
 }
 
 void adicionar_rb(index_rb *valor, arvore_rb *raiz){
-    //AJEITAR FUNCAO DE ADICIONARRRRR
     arvore_rb posicao, pai, novo;
-    posicao = raiz;
+    posicao = *raiz;
     pai = NULL;
     while(posicao != NULL) {
         pai = posicao;
