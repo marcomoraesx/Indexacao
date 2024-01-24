@@ -55,15 +55,15 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 	}
 }
 
-void buscarEstudantePeloCpf(tabela *tab, char *valor) {
+void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
+    buscar_bst(raiz, valor, tab);
+}
+
+void buscarEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
 
 }
 
-void buscarEstudantePelaMatricula(tabela *tab, int valor) {
-
-}
-
-void buscarEstudantePeloEmail(tabela *tab, char *valor) {
+void buscarEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
 
 }
 

@@ -68,9 +68,9 @@ void removerEstudantePeloCpf(tabela *tab, char *valor);
 void removerEstudantePelaMatricula(tabela *tab, int valor);
 void removerEstudantePeloEmail(tabela *tab, char *valor);
 
-void buscarEstudantePeloCpf(tabela *tab, char *valor);
-void buscarEstudantePelaMatricula(tabela *tab, int valor);
-void buscarEstudantePeloEmail(tabela *tab, char *valor);
+void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz);
+void buscarEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz);
+void buscarEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz);
 
 void ordenarEstudantesPeloCpf(arvore_bst raiz, tabela *tab);
 void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab);
@@ -87,6 +87,7 @@ index_bst * menor_elemento_bst(arvore_bst raiz);
 void pre_order_bst(arvore_bst raiz, tabela *tab);
 void pos_order_bst(arvore_bst raiz, tabela *tab);
 void in_order_bst(arvore_bst raiz, tabela *tab);
+void buscar_bst(arvore_bst raiz, char *valor, tabela *tab);
 
 void salvar_arquivo_bst(char *nome, arvore_bst a);
 void salvar_auxiliar_bst(arvore_bst raiz, FILE *arq);
@@ -108,6 +109,7 @@ index_avl * menor_elemento_avl(arvore_avl raiz);
 void pre_order_avl(arvore_avl raiz, tabela *tab);
 void pos_order_avl(arvore_avl raiz, tabela *tab);
 void in_order_avl(arvore_avl raiz, tabela *tab);
+void buscar_avl(arvore_avl raiz, int valor, tabela *tab);
 
 void salvar_arquivo_avl(char *nome, arvore_avl a);
 void salvar_auxiliar_avl(arvore_avl raiz, FILE *arq);
@@ -136,6 +138,7 @@ void imprimir_elemento_rb(arvore_rb raiz, tabela * tab);
 void pre_order_rb(arvore_rb raiz, tabela *tab);
 void pos_order_rb(arvore_rb raiz, tabela *tab);
 void in_order_rb(arvore_rb raiz, tabela *tab);
+void buscar_rb(arvore_rb raiz, char *valor, tabela *tab);
 
 void salvar_arquivo_rb(char *nome, arvore_rb a);
 void salvar_auxiliar_rb(arvore_rb raiz, FILE *arq);

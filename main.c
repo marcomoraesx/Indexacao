@@ -20,20 +20,22 @@ int main(int argc, char * argv[]) {
 						break;
 				case 2:
                         printf("Informe o CPF ao qual será consultado: ");
+                        __fpurge(stdin);
                         fgets(cpf, 20,  stdin);
                         tirar_enter(cpf);
-                        buscarEstudantePeloCpf(&tab, &cpf);
+                        buscarEstudantePeloCpf(&tab, &cpf, tab.indices_cpf);
 						break;
 				case 3:
                         printf("Informe a MATRICULA a qual será consultada: ");
                         scanf("%d", &matricula);
-						buscarEstudantePelaMatricula(&tab, matricula);
+						buscarEstudantePelaMatricula(&tab, matricula, tab.indices_matricula);
 						break;
 				case 4:
                         printf("Informe o EMAIL ao qual será consultado: ");
+                        __fpurge(stdin);
                         fgets(email, 127,  stdin);
                         tirar_enter(email);
-						buscarEstudantePeloEmail(&tab, &email);
+						buscarEstudantePeloEmail(&tab, &email, tab.indices_email);
 						break;
 				case 5:
 						ordenarEstudantesPeloCpf(tab.indices_cpf, &tab);

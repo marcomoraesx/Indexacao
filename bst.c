@@ -28,7 +28,7 @@ arvore_bst remover_bst(char *valor, arvore_bst raiz) {
 	if(raiz == NULL)
 		return NULL;
 
-	if(strcmp(valor, raiz->dado->chave)) {
+	if(strcmp(valor, raiz->dado->chave) == 0) {
 		if(raiz->esq == NULL) {
 			return raiz->dir;
 		}
@@ -45,6 +45,21 @@ arvore_bst remover_bst(char *valor, arvore_bst raiz) {
 			raiz->esq = remover_bst(valor, raiz->esq);
 	}
 	return raiz;
+}
+
+void buscar_bst(arvore_bst raiz, char *valor, tabela *tab) {
+    if (raiz != NULL) {
+        if (strcmp(raiz->dado->chave, valor) == 0) {
+            imprimir_elemento_bst(raiz, tab);
+            return;
+        }
+        if (strcmp(valor, raiz->dado->chave) > 0) {
+            buscar_bst(raiz->dir, valor, tab);
+        } else {
+            buscar_bst(raiz->esq, valor, tab);
+        }
+    }
+    return;
 }
 
 void imprimir_elemento_bst(arvore_bst raiz, tabela * tab) {
