@@ -55,6 +55,30 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 	}
 }
 
+void buscarEstudantePeloCpf(tabela *tab, char *valor) {
+
+}
+
+void buscarEstudantePelaMatricula(tabela *tab, int valor) {
+
+}
+
+void buscarEstudantePeloEmail(tabela *tab, char *valor) {
+
+}
+
+void ordenarEstudantesPeloCpf(arvore_bst raiz, tabela *tab) {
+    in_order_bst(raiz, tab);
+}
+
+void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab) {
+    in_order_avl(raiz, tab);
+}
+
+void ordenarEstudantesPeloEmail(arvore_rb raiz, tabela *tab) {
+    in_order_rb(raiz, tab);
+}
+
 int maior(int a, int b) {
 	if(a > b)
 		return a;
@@ -64,11 +88,12 @@ int maior(int a, int b) {
 
 dado * ler_dados() {
 	dado *novo = (dado *) malloc(sizeof(dado));
-	strcpy(novo->nome, "Marco");
-	strcpy(novo->cpf, "345345345");
+	strcpy(novo->nome, "Marco Antônio");
+	strcpy(novo->cpf, "4397294354");
 	novo->debito = 0;
-	strcpy(novo->email, "marcomoraes");
+	strcpy(novo->email, "marcomoraes@teste");
 	strcpy(novo->telefone, "45634534");
+	strcpy(novo->curso, "bcc");
 	novo->matricula = 234234;
 
 	/*//__fpurge(stdin);

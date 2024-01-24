@@ -255,7 +255,7 @@ void imprimir_elemento_avl(arvore_avl raiz, tabela * tab) {
 	dado * temp = (dado *) malloc (sizeof(dado));
    	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
 	int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-	printf("[%d, %d, %s, %s, %s ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email);
+	printf(" - [ %d, %d, %s, %s, %s, %s, %s, %d ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email, temp->telefone, temp->curso, temp->debito);
 	free(temp);
 }
 

@@ -11,38 +11,41 @@ int main(int argc, char * argv[]) {
 		scanf("%d", &opcao);
 
 		switch(opcao) {
-				int valor;
+                char cpf[20];
+				int matricula;
+				char email[127];
+
 				case 1:
-						//printf("%d\n", altura(tab.indices));
-						break;
-				case 2:
 						adicionarEstudante(&tab, ler_dados());
 						break;
+				case 2:
+                        printf("Informe o CPF ao qual será consultado: ");
+                        fgets(cpf, 20,  stdin);
+                        tirar_enter(cpf);
+                        buscarEstudantePeloCpf(&tab, &cpf);
+						break;
 				case 3:
-						//printf("%d\n", maior_elemento(tab.indices)->chave);
+                        printf("Informe a MATRICULA a qual será consultada: ");
+                        scanf("%d", &matricula);
+						buscarEstudantePelaMatricula(&tab, matricula);
 						break;
 				case 4:
-						//printf("%d\n", menor_elemento(tab.indices)->chave);
+                        printf("Informe o EMAIL ao qual será consultado: ");
+                        fgets(email, 127,  stdin);
+                        tirar_enter(email);
+						buscarEstudantePeloEmail(&tab, &email);
 						break;
 				case 5:
-						//pre_order(tab.indices, &tab);
+						ordenarEstudantesPeloCpf(tab.indices_cpf, &tab);
 						printf("\n");
 						break;
 				case 6:
-						//in_order(tab.indices, &tab);
+						ordenarEstudantesPelaMatricula(tab.indices_matricula, &tab);
 						printf("\n");
 						break;
 				case 7:
-						//pos_order(tab.indices, &tab);
+						ordenarEstudantesPeloEmail(tab.indices_email, &tab);
 						printf("\n");
-						break;
-
-				case 10:
-						//salvar_arquivo("dados.dat", tab.indices);
-						break;
-
-				case 11:
-						//tab.indices = carregar_arquivo("dados.dat", tab.indices);
 						break;
 				case 99:
 						finalizar(&tab);

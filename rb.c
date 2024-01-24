@@ -205,7 +205,7 @@ void imprimir_elemento_rb(arvore_rb raiz, tabela * tab) {
 	dado * temp = (dado *) malloc (sizeof(dado));
    	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
 	int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-	printf("[%s, %d, %s, %s, %s ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email);
+	printf(" - [ %s, %d, %s, %s, %d, %s, %s, %d ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->matricula, temp->telefone, temp->curso, temp->debito);
 	free(temp);
 }
 

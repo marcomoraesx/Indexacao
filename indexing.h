@@ -72,9 +72,9 @@ void buscarEstudantePeloCpf(tabela *tab, char *valor);
 void buscarEstudantePelaMatricula(tabela *tab, int valor);
 void buscarEstudantePeloEmail(tabela *tab, char *valor);
 
-void ordenarEstudantesPeloCpf(tabela *tab);
-void ordenarEstudantesPelaMatricula(tabela *tab);
-void ordenarEstudantesPeloEmail(tabela *tab);
+void ordenarEstudantesPeloCpf(arvore_bst raiz, tabela *tab);
+void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab);
+void ordenarEstudantesPeloEmail(arvore_rb raiz, tabela *tab);
 
 //BST
 void inicializar_bst(arvore_bst *raiz);
