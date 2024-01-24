@@ -201,6 +201,22 @@ index_rb * menor_elemento_rb(arvore_rb raiz) {
 			return maior_elemento_rb(raiz->esq);
 }
 
+arvore_rb buscar_rb(arvore_rb raiz, char *valor) {
+    arvore_rb encontrado = NULL;
+    if (raiz != NULL) {
+        if (strcmp(valor, raiz->dado->chave) == 0) {
+            encontrado = raiz;
+            return encontrado;
+        }
+        if (strcmp(valor, raiz->dado->chave) > 0) {
+            encontrado = buscar_rb(raiz->dir, valor);
+        } else {
+            encontrado = buscar_rb(raiz->esq, valor);
+        }
+    }
+    return encontrado;
+}
+
 void imprimir_elemento_rb(arvore_rb raiz, tabela * tab) {
 	dado * temp = (dado *) malloc (sizeof(dado));
    	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);

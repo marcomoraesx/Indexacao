@@ -251,6 +251,22 @@ arvore_avl remover_avl(arvore_avl raiz, int valor, int *caiu) {
     return raiz;
 }
 
+arvore_avl buscar_avl(arvore_avl raiz, int valor) {
+    arvore_avl encontrado = NULL;
+    if (raiz != NULL) {
+        if (valor == raiz->dado->chave) {
+            encontrado = raiz;
+            return encontrado;
+        }
+        if (valor > raiz->dado->chave) {
+            encontrado = buscar_avl(raiz->dir, valor);
+        } else {
+            encontrado = buscar_avl(raiz->esq, valor);
+        }
+    }
+    return encontrado;
+}
+
 void imprimir_elemento_avl(arvore_avl raiz, tabela * tab) {
 	dado * temp = (dado *) malloc (sizeof(dado));
    	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
