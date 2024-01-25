@@ -49,6 +49,13 @@ int main(int argc, char * argv[]) {
 						ordenarEstudantesPeloEmail(tab.indices_email, &tab);
 						printf("\n");
 						break;
+                case 8:
+                        printf("Informe o CPF do registro que deve ser removido: ");
+                        __fpurge(stdin);
+                        fgets(cpf, 20,  stdin);
+                        tirar_enter(cpf);
+                        removerEstudantePeloCpf(&tab, &cpf, tab.indices_cpf, tab.indices_matricula, tab.indices_email);
+                        break;
 				case 99:
 						finalizar(&tab);
 						exit(0);

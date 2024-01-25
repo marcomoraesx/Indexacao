@@ -22,7 +22,7 @@ void adicionar_rb(index_rb *valor, arvore_rb *raiz){
     pai = NULL;
     while(posicao != NULL) {
         pai = posicao;
-        if (valor->chave > posicao->dado->chave) {
+        if (strcmp(valor->chave, posicao->dado->chave) > 0) {
             posicao = posicao->dir;
         } else {
             posicao = posicao->esq;
@@ -37,7 +37,7 @@ void adicionar_rb(index_rb *valor, arvore_rb *raiz){
     if (eh_raiz(novo)) {
         *raiz = novo;
     } else {
-        if (valor->chave > pai->dado->chave) {
+        if (strcmp(valor->chave, pai->dado->chave) > 0) {
             pai->dir = novo;
         } else {
             pai->esq = novo;
@@ -253,7 +253,7 @@ void remover_rb(char *valor, arvore_rb *raiz) {
     arvore_rb posicao;
     posicao = *raiz;
     while (posicao != NULL) {
-        if (valor == posicao->dado->chave) {
+        if (strcmp(valor, posicao->dado->chave) == 0) {
             if (posicao->esq != NULL && posicao->dir != NULL) {
                 posicao->dado = maior_elemento_rb(posicao->esq);
                 remover_rb(posicao->dado->chave, &(posicao->esq));
@@ -320,7 +320,7 @@ void remover_rb(char *valor, arvore_rb *raiz) {
                 }
             }
         }
-        if (valor > posicao->dado->chave) {
+        if (strcmp(valor, posicao->dado->chave) > 0) {
             posicao = posicao->dir;
         } else {
             posicao = posicao->esq;

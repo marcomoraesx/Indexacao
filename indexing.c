@@ -18,7 +18,7 @@ int inicializarTabela(tabela *tab) {
 		return 0;
 }
 
-void finalizar (tabela *tab) {
+void finalizar(tabela *tab) {
 	fclose(tab->arquivo_dados);
 	salvar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
 	salvar_arquivo_avl("indices_matricula.ext", tab->indices_matricula);
@@ -53,6 +53,33 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			strcpy(novo_rb->chave, estudante->email);
 			adicionar_rb(novo_rb, &tab->indices_email);
 	}
+}
+
+void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvore_avl raiz_avl, arvore_rb raiz_rb) {
+    if (tab->arquivo_dados != NULL) {
+        arvore_bst registro = buscar_bst(raiz_bst, valor);
+        int caiu = 0;
+        if (registro) {
+            dado * temp = (dado *) malloc (sizeof(dado));
+            fseek(tab->arquivo_dados, raiz_bst->dado->indice, SEEK_SET);
+            fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+            raiz_bst = remover_bst(&temp->cpf, raiz_bst);
+            raiz_avl = remover_avl(raiz_avl, temp->matricula, &caiu);
+            remover_rb(&temp->email, &raiz_rb);
+            free(temp);
+        } else {
+            printf("Registro não encontrado!\n");
+        }
+    }
+}
+
+void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
+    int caiu = 0;
+    raiz = remover_avl(raiz, valor, &caiu);
+}
+
+void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
+    remover_rb(valor, &raiz);
 }
 
 void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
@@ -103,15 +130,15 @@ int maior(int a, int b) {
 
 dado * ler_dados() {
 	dado *novo = (dado *) malloc(sizeof(dado));
-	strcpy(novo->nome, "Marco Antônio");
+	/*strcpy(novo->nome, "Marco Antônio");
 	strcpy(novo->cpf, "4397294354");
 	novo->debito = 0;
 	strcpy(novo->email, "marcomoraes@teste");
 	strcpy(novo->telefone, "45634534");
 	strcpy(novo->curso, "bcc");
-	novo->matricula = 234234;
+	novo->matricula = 234234;*/
 
-	/*//__fpurge(stdin);
+	//__fpurge(stdin);
 	getchar();
 	printf("Nome: ");
 	fgets(novo->nome, 255,  stdin);
@@ -133,7 +160,6 @@ dado * ler_dados() {
 	tirar_enter(novo->curso);
 	printf("Débito: ");
 	scanf("%d", &novo->debito);
-	*/
 	return novo;
 }
 

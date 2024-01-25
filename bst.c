@@ -27,7 +27,6 @@ arvore_bst adicionar_bst(index_bst *valor, arvore_bst raiz){
 arvore_bst remover_bst(char *valor, arvore_bst raiz) {
 	if(raiz == NULL)
 		return NULL;
-
 	if(strcmp(valor, raiz->dado->chave) == 0) {
 		if(raiz->esq == NULL) {
 			return raiz->dir;
