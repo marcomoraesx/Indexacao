@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1706143100 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/main.c
+1706546012 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/main.c
 	<stdio.h>
 	<stdlib.h>
 	"indexing.h"
 
-1706143115 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/indexing.c
+1706545828 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/indexing.c
 	<stdio.h>
 	<stdio_ext.h>
 	<stdlib.h>
@@ -21,13 +21,13 @@
 	"indexing.h"
 	<string.h>
 
-1706139308 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/avl.c
+1706544909 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/avl.c
 	"indexing.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1706142063 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/bst.c
+1706544844 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/bst.c
 	"indexing.h"
 	<stdlib.h>
 	<stdio.h>

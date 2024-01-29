@@ -58,12 +58,12 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvore_avl raiz_avl, arvore_rb raiz_rb) {
     if (tab->arquivo_dados != NULL) {
         arvore_bst registro = buscar_bst(raiz_bst, valor);
-        int caiu = 0;
         if (registro) {
+            int caiu = 0;
             dado * temp = (dado *) malloc (sizeof(dado));
-            fseek(tab->arquivo_dados, raiz_bst->dado->indice, SEEK_SET);
+            fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-            raiz_bst = remover_bst(&temp->cpf, raiz_bst);
+            raiz_bst = remover_bst(valor, raiz_bst);
             raiz_avl = remover_avl(raiz_avl, temp->matricula, &caiu);
             remover_rb(&temp->email, &raiz_rb);
             free(temp);
@@ -74,12 +74,16 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvo
 }
 
 void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
-    int caiu = 0;
-    raiz = remover_avl(raiz, valor, &caiu);
+    if (tab->arquivo_dados != NULL) {
+        int caiu = 0;
+        raiz = remover_avl(raiz, valor, &caiu);
+    }
 }
 
 void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
-    remover_rb(valor, &raiz);
+    if (tab->arquivo_dados != NULL) {
+        remover_rb(valor, &raiz);
+    }
 }
 
 void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
@@ -110,15 +114,21 @@ void buscarEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
 }
 
 void ordenarEstudantesPeloCpf(arvore_bst raiz, tabela *tab) {
-    in_order_bst(raiz, tab);
+    if (raiz != NULL) {
+        in_order_bst(raiz, tab);
+    }
 }
 
 void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab) {
-    in_order_avl(raiz, tab);
+    if (raiz != NULL) {
+        in_order_avl(raiz, tab);
+    }
 }
 
 void ordenarEstudantesPeloEmail(arvore_rb raiz, tabela *tab) {
-    in_order_rb(raiz, tab);
+    if (raiz != NULL) {
+        in_order_rb(raiz, tab);
+    }
 }
 
 int maior(int a, int b) {

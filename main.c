@@ -56,6 +56,18 @@ int main(int argc, char * argv[]) {
                         tirar_enter(cpf);
                         removerEstudantePeloCpf(&tab, &cpf, tab.indices_cpf, tab.indices_matricula, tab.indices_email);
                         break;
+                case 9:
+                        printf("Informe a MATRICULA do registro que deve ser removido: ");
+                        scanf("%d", &matricula);
+                        removerEstudantePelaMatricula(&tab, matricula, tab.indices_matricula);
+                        break;
+                case 10:
+                        printf("Informe o EMAIL do registro que deve ser removido: ");
+                        __fpurge(stdin);
+                        fgets(email, 127,  stdin);
+                        tirar_enter(email);
+                        removerEstudantePeloEmail(&tab, &email, tab.indices_email);
+                        break;
 				case 99:
 						finalizar(&tab);
 						exit(0);
