@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-void inicializar_bst(arvore_bst *raiz) {
-    *raiz = NULL;
+void inicializar_bst(arvore_bst raiz) {
+    raiz = NULL;
 }
 
 arvore_bst adicionar_bst(index_bst *valor, arvore_bst raiz){
@@ -25,25 +25,32 @@ arvore_bst adicionar_bst(index_bst *valor, arvore_bst raiz){
 }
 
 arvore_bst remover_bst(char *valor, arvore_bst raiz) {
-	if(raiz == NULL)
-		return NULL;
-	if(strcmp(valor, raiz->dado->chave) == 0) {
-		if(raiz->esq == NULL) {
-			return raiz->dir;
-		}
-		if(raiz->dir == NULL) {
-			return raiz->esq;
-		}
-		raiz->dado = maior_elemento_bst(raiz->esq);
-		raiz->esq = remover_bst(raiz->dado->chave, raiz->esq);
-		return raiz;
-	}
-	if(strcmp(valor, raiz->dado->chave) > 0) {
-			raiz->dir = remover_bst(valor, raiz->dir);
-	} else {
-			raiz->esq = remover_bst(valor, raiz->esq);
-	}
-	return raiz;
+  if (raiz != NULL) {
+        if (strcmp(valor, raiz->dado->chave) == 0) {
+            if (raiz->esq == NULL && raiz->dir == NULL) {
+                free(raiz);
+                return NULL;
+            }
+            if (raiz->esq != NULL && raiz->dir == NULL) {
+                arvore_bst temp = raiz->esq;
+                free(raiz);
+                return temp;
+            }
+            if (raiz->dir != NULL && raiz->esq == NULL) {
+                arvore_bst temp = raiz->dir;
+                free(raiz);
+                return temp;
+            }
+            raiz->dado = menor_elemento_bst(raiz->dir);
+            raiz->dir = remover_bst(raiz->dado->chave, raiz->dir);
+            return raiz;
+        } else if (strcmp(valor, raiz->dado->chave) > 0) {
+            raiz->dir = remover_bst(valor, raiz->dir);
+        } else {
+            raiz->esq = remover_bst(valor, raiz->esq);
+        }
+    }
+    return raiz;
 }
 
 arvore_bst buscar_bst(arvore_bst raiz, char *valor) {
@@ -63,11 +70,13 @@ arvore_bst buscar_bst(arvore_bst raiz, char *valor) {
 }
 
 void imprimir_elemento_bst(arvore_bst raiz, tabela * tab) {
-	dado * temp = (dado *) malloc (sizeof(dado));
-   	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
-	int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-	printf(" - [ %s, %d, %s, %s, %d, %s, %s, %d ]\n", raiz->dado->chave, r, temp->nome, temp->email, temp->matricula, temp->telefone, temp->curso, temp->debito);
-	free(temp);
+    if (raiz != NULL) {
+        dado * temp = (dado *) malloc (sizeof(dado));
+        fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
+        int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+        printf(" - [ %s, %d, %s, %s, %d, %s, %s, %d ]\n", raiz->dado->chave, r, temp->nome, temp->email, temp->matricula, temp->telefone, temp->curso, temp->debito);
+        free(temp);
+	}
 }
 
 void pre_order_bst(arvore_bst raiz, tabela *tab) {

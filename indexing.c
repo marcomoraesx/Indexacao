@@ -5,8 +5,8 @@
 #include <string.h>
 
 int inicializarTabela(tabela *tab) {
-	inicializar_bst(&tab->indices_cpf);
-	inicializar_avl(&tab->indices_matricula);
+	inicializar_bst(tab->indices_cpf);
+	inicializar_avl(tab->indices_matricula);
 	inicializar_rb(&tab->indices_email);
 	tab->arquivo_dados = fopen("dados.ext", "a+b");
 	tab->indices_cpf = carregar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
@@ -73,16 +73,39 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvo
     }
 }
 
-void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
+void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz_avl, arvore_bst raiz_bst, arvore_rb raiz_rb) {
     if (tab->arquivo_dados != NULL) {
-        int caiu = 0;
-        raiz = remover_avl(raiz, valor, &caiu);
+        arvore_avl registro = buscar_avl(raiz_avl, valor);
+        if (registro) {
+            int caiu = 0;
+            dado * temp = (dado *) malloc (sizeof(dado));
+            fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
+            fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+            raiz_bst = remover_bst(&temp->cpf, raiz_bst);
+            raiz_avl = remover_avl(raiz_avl, valor, &caiu);
+            remover_rb(&temp->email, &raiz_rb);
+            free(temp);
+        } else {
+            printf("Registro não encontrado!\n");
+        }
     }
 }
 
-void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
+void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz_rb, arvore_avl raiz_avl, arvore_bst raiz_bst) {
     if (tab->arquivo_dados != NULL) {
-        remover_rb(valor, &raiz);
+        arvore_rb registro = buscar_rb(raiz_rb, valor);
+        if (registro) {
+            int caiu = 0;
+            dado * temp = (dado *) malloc (sizeof(dado));
+            fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
+            fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+            raiz_bst = remover_bst(&temp->cpf, raiz_bst);
+            raiz_avl = remover_avl(raiz_avl, temp->matricula, &caiu);
+            remover_rb(valor, &raiz_rb);
+            free(temp);
+        } else {
+            printf("Registro não encontrado!\n");
+        }
     }
 }
 

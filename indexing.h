@@ -64,8 +64,8 @@ void finalizar (tabela *tab);
 void adicionarEstudante(tabela *tab, dado *estudante);
 
 void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvore_avl raiz_avl, arvore_rb raiz_rb);
-void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz);
-void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz);
+void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz, arvore_bst raiz_bst, arvore_rb raiz_rb);
+void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz, arvore_avl raiz_avl, arvore_bst raiz_bst);
 
 void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz);
 void buscarEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz);
@@ -76,7 +76,7 @@ void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab);
 void ordenarEstudantesPeloEmail(arvore_rb raiz, tabela *tab);
 
 //BST
-void inicializar_bst(arvore_bst *raiz);
+void inicializar_bst(arvore_bst raiz);
 arvore_bst adicionar_bst(index_bst *valor, arvore_bst raiz);
 arvore_bst remover_bst(char *valor, arvore_bst raiz);
 int altura_bst(arvore_bst raiz);
@@ -93,7 +93,7 @@ void salvar_auxiliar_bst(arvore_bst raiz, FILE *arq);
 arvore_bst carregar_arquivo_bst(char *nome, arvore_bst a);
 
 //AVL
-void inicializar_avl(arvore_avl *raiz);
+void inicializar_avl(arvore_avl raiz);
 arvore_avl adicionar_avl(arvore_avl raiz, index_avl *valor, int *cresceu);
 arvore_avl rotacao_avl(arvore_avl pivo);
 arvore_avl rotacao_simples_esquerda_avl(arvore_avl pivo);

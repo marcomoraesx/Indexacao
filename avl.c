@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-void inicializar_avl(arvore_avl *raiz) {
-    *raiz = NULL;
+void inicializar_avl(arvore_avl raiz) {
+    raiz = NULL;
 }
 
 arvore_avl adicionar_avl(arvore_avl raiz, index_avl *valor, int *cresceu){
@@ -268,11 +268,13 @@ arvore_avl buscar_avl(arvore_avl raiz, int valor) {
 }
 
 void imprimir_elemento_avl(arvore_avl raiz, tabela * tab) {
-	dado * temp = (dado *) malloc (sizeof(dado));
-   	fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
-	int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-	printf(" - [ %d, %d, %s, %s, %s, %s, %s, %d ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email, temp->telefone, temp->curso, temp->debito);
-	free(temp);
+    if (raiz != NULL) {
+        dado * temp = (dado *) malloc (sizeof(dado));
+        fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
+        int r = fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+        printf(" - [ %d, %d, %s, %s, %s, %s, %s, %d ]\n", raiz->dado->chave, r, temp->nome, temp->cpf, temp->email, temp->telefone, temp->curso, temp->debito);
+        free(temp);
+    }
 }
 
 void pre_order_avl(arvore_avl raiz, tabela *tab) {
