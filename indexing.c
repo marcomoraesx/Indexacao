@@ -55,17 +55,17 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 	}
 }
 
-void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvore_avl raiz_avl, arvore_rb raiz_rb) {
+void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
     if (tab->arquivo_dados != NULL) {
-        arvore_bst registro = buscar_bst(raiz_bst, valor);
+        arvore_bst registro = buscar_bst(raiz, valor);
         if (registro) {
             int caiu = 0;
             dado * temp = (dado *) malloc (sizeof(dado));
             fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-            raiz_bst = remover_bst(valor, raiz_bst);
-            raiz_avl = remover_avl(raiz_avl, temp->matricula, &caiu);
-            remover_rb(&temp->email, &raiz_rb);
+            tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
+            tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
+            remover_rb(&temp->email, &tab->indices_email);
             free(temp);
         } else {
             printf("Registro não encontrado!\n");
@@ -73,17 +73,17 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvo
     }
 }
 
-void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz_avl, arvore_bst raiz_bst, arvore_rb raiz_rb) {
+void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
     if (tab->arquivo_dados != NULL) {
-        arvore_avl registro = buscar_avl(raiz_avl, valor);
+        arvore_avl registro = buscar_avl(raiz, valor);
         if (registro) {
             int caiu = 0;
             dado * temp = (dado *) malloc (sizeof(dado));
             fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-            raiz_bst = remover_bst(&temp->cpf, raiz_bst);
-            raiz_avl = remover_avl(raiz_avl, valor, &caiu);
-            remover_rb(&temp->email, &raiz_rb);
+            tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
+            tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
+            remover_rb(&temp->email, &tab->indices_email);
             free(temp);
         } else {
             printf("Registro não encontrado!\n");
@@ -91,17 +91,17 @@ void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz_avl, 
     }
 }
 
-void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz_rb, arvore_avl raiz_avl, arvore_bst raiz_bst) {
+void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
     if (tab->arquivo_dados != NULL) {
-        arvore_rb registro = buscar_rb(raiz_rb, valor);
+        arvore_rb registro = buscar_rb(raiz, valor);
         if (registro) {
             int caiu = 0;
             dado * temp = (dado *) malloc (sizeof(dado));
             fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
-            raiz_bst = remover_bst(&temp->cpf, raiz_bst);
-            raiz_avl = remover_avl(raiz_avl, temp->matricula, &caiu);
-            remover_rb(valor, &raiz_rb);
+            tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
+            tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
+            remover_rb(&temp->email, &tab->indices_email);
             free(temp);
         } else {
             printf("Registro não encontrado!\n");
@@ -171,7 +171,6 @@ dado * ler_dados() {
 	strcpy(novo->curso, "bcc");
 	novo->matricula = 234234;*/
 
-	//__fpurge(stdin);
 	getchar();
 	printf("Nome: ");
 	fgets(novo->nome, 255,  stdin);

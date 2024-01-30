@@ -8,7 +8,21 @@ int main(int argc, char * argv[]) {
 	inicializarTabela(&tab);
 
 	while(1) {
-		scanf("%d", &opcao);
+        printf("\n================ Controle de registros para Discentes de Biblioteca =================\n");
+        printf("[1] Adicionar registro\n");
+        printf("[2] Buscar registro por CPF\n");
+        printf("[3] Buscar registro por matrícula\n");
+        printf("[4] Buscar registro por email\n");
+        printf("[5] Ordenar registros por CPF\n");
+        printf("[6] Ordenar registros por matrícula\n");
+        printf("[7] Ordenar registros por email\n");
+        printf("[8] Remover registro pelo CPF\n");
+        printf("[9] Remover registro pela matrícula\n");
+        printf("[10] Remover registro pelo email\n");
+        printf("[99] Sair e Salvar\n");
+        printf("========================================================================\n\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
 
 		switch(opcao) {
                 char cpf[20];
@@ -16,9 +30,11 @@ int main(int argc, char * argv[]) {
 				char email[127];
 
 				case 1:
+                        printf("Você escolheu adicionar registro.\n");
 						adicionarEstudante(&tab, ler_dados());
 						break;
 				case 2:
+                        printf("Você escolheu buscar registro por CPF.\n");
                         printf("Informe o CPF ao qual será consultado: ");
                         __fpurge(stdin);
                         fgets(cpf, 20,  stdin);
@@ -54,23 +70,25 @@ int main(int argc, char * argv[]) {
                         __fpurge(stdin);
                         fgets(cpf, 20,  stdin);
                         tirar_enter(cpf);
-                        removerEstudantePeloCpf(&tab, &cpf, tab.indices_cpf, tab.indices_matricula, tab.indices_email);
+                        removerEstudantePeloCpf(&tab, &cpf, tab.indices_cpf);
                         break;
                 case 9:
                         printf("Informe a MATRICULA do registro que deve ser removido: ");
                         scanf("%d", &matricula);
-                        removerEstudantePelaMatricula(&tab, matricula, tab.indices_matricula, tab.indices_cpf, tab.indices_email);
+                        removerEstudantePelaMatricula(&tab, matricula, tab.indices_matricula);
                         break;
                 case 10:
                         printf("Informe o EMAIL do registro que deve ser removido: ");
                         __fpurge(stdin);
                         fgets(email, 127,  stdin);
                         tirar_enter(email);
-                        removerEstudantePeloEmail(&tab, &email, tab.indices_email, tab.indices_matricula, tab.indices_cpf);
+                        removerEstudantePeloEmail(&tab, &email, tab.indices_email);
                         break;
 				case 99:
 						finalizar(&tab);
 						exit(0);
+                default:
+                        printf("\nOpção inválida. Tente novamente.\n\n");
 		}
 	}
 }

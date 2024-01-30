@@ -63,9 +63,9 @@ int inicializarTabela(tabela *tab);
 void finalizar (tabela *tab);
 void adicionarEstudante(tabela *tab, dado *estudante);
 
-void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz_bst, arvore_avl raiz_avl, arvore_rb raiz_rb);
-void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz, arvore_bst raiz_bst, arvore_rb raiz_rb);
-void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz, arvore_avl raiz_avl, arvore_bst raiz_bst);
+void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz);
+void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz);
+void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz);
 
 void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz);
 void buscarEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz);
