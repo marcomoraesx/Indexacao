@@ -52,6 +52,7 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			//Adicionar chave para EMAIL
 			strcpy(novo_rb->chave, estudante->email);
 			adicionar_rb(novo_rb, &tab->indices_email);
+			printf("\nInserido com sucesso!\n");
 	}
 }
 
@@ -67,6 +68,7 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
             free(temp);
+            printf("\nRegistro removido com sucesso!\n");
         } else {
             printf("Registro não encontrado!\n");
         }
@@ -85,6 +87,7 @@ void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
             free(temp);
+            printf("\nRegistro removido com sucesso!\n");
         } else {
             printf("Registro não encontrado!\n");
         }
@@ -103,6 +106,7 @@ void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
             free(temp);
+            printf("\nRegistro removido com sucesso!\n");
         } else {
             printf("Registro não encontrado!\n");
         }
@@ -112,7 +116,9 @@ void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
 void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
     arvore_bst registro = buscar_bst(raiz, valor);
     if (registro) {
+        printf("================= Aluno =================\n");
         imprimir_elemento_bst(registro, tab);
+        printf("\n=========================================\n");
     } else {
         printf("Registro não encontrado!\n");
     }
@@ -121,7 +127,9 @@ void buscarEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
 void buscarEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
     arvore_avl registro = buscar_avl(raiz, valor);
     if (registro) {
+        printf("================= Aluno =================\n");
         imprimir_elemento_avl(registro, tab);
+        printf("\n=========================================\n");
     } else {
         printf("Registro não encontrado!\n");
     }
@@ -130,7 +138,9 @@ void buscarEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
 void buscarEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
     arvore_rb registro = buscar_rb(raiz, valor);
     if (registro) {
+        printf("================= Aluno =================\n");
         imprimir_elemento_rb(registro, tab);
+        printf("\n=========================================\n");
     } else {
         printf("Registro não encontrado!\n");
     }
@@ -138,19 +148,25 @@ void buscarEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
 
 void ordenarEstudantesPeloCpf(arvore_bst raiz, tabela *tab) {
     if (raiz != NULL) {
+        printf("================= Lista de Alunos =================\n");
         in_order_bst(raiz, tab);
+        printf("\n===================================================\n");
     }
 }
 
 void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab) {
     if (raiz != NULL) {
+        printf("================= Lista de Alunos =================\n");
         in_order_avl(raiz, tab);
+        printf("\n===================================================\n");
     }
 }
 
 void ordenarEstudantesPeloEmail(arvore_rb raiz, tabela *tab) {
     if (raiz != NULL) {
+        printf("================= Lista de Alunos =================\n");
         in_order_rb(raiz, tab);
+        printf("\n===================================================\n");
     }
 }
 
