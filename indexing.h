@@ -52,11 +52,19 @@ typedef struct no_rb{
 
 typedef no_rb * arvore_rb;
 
+typedef struct no_fila{
+        int indice;
+        struct no* proximo;
+} no_fila;
+
+typedef no_fila * fila;
+
 typedef struct tabela {
 	FILE *arquivo_dados;
 	arvore_bst indices_cpf;
 	arvore_avl indices_matricula;
 	arvore_rb indices_email;
+	fila indices_alocacao;
 } tabela;
 
 int inicializarTabela(tabela *tab);
@@ -142,6 +150,12 @@ arvore_rb buscar_rb(arvore_rb raiz, char *valor);
 void salvar_arquivo_rb(char *nome, arvore_rb a);
 void salvar_auxiliar_rb(arvore_rb raiz, FILE *arq);
 arvore_rb carregar_arquivo_rb(char *nome, arvore_rb a);
+
+//FILA
+void inicializar_fila(fila f);
+void exibir_fila(fila f);
+fila enqueue(fila f, int valor);
+fila dequeue(fila f);
 
 int maior(int a, int b);
 dado * ler_dados();
