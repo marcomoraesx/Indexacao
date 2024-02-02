@@ -2,34 +2,34 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="avl.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="578" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="rb.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5003" topLine="138" />
-		</Cursor>
-	</File>
-	<File name="indexing.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5478" topLine="159" />
-		</Cursor>
-	</File>
-	<File name="bst.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1057" topLine="36" />
-		</Cursor>
-	</File>
 	<File name="main.c" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="122" topLine="0" />
+			<Cursor1 position="2706" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="indexing.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="708" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="rb.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5311" topLine="192" />
+		</Cursor>
+	</File>
+	<File name="avl.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8599" topLine="255" />
+		</Cursor>
+	</File>
+	<File name="bst.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2360" topLine="48" />
+		</Cursor>
+	</File>
+	<File name="indexing.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6462" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -33,12 +33,13 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 
 			fseek(tab->arquivo_dados, 0L, SEEK_END);
 
+			int index = ftell(tab->arquivo_dados) ;
 			//Adicionar indice para CPF
-			novo_bst->indice = ftell(tab->arquivo_dados);
+			novo_bst->indice = index;
 			//Adicionar indice para MATRICULA
-			novo_avl->indice = ftell(tab->arquivo_dados);
+			novo_avl->indice = index;
 			//Adicionar indice para EMAIL
-			novo_rb->indice = ftell(tab->arquivo_dados);
+			novo_rb->indice = index;
 
 			fwrite(estudante, sizeof(dado), 1, tab->arquivo_dados);
 
@@ -151,6 +152,8 @@ void ordenarEstudantesPeloCpf(arvore_bst raiz, tabela *tab) {
         printf("================= Lista de Alunos =================\n");
         in_order_bst(raiz, tab);
         printf("\n===================================================\n");
+    } else {
+        printf("Não foram encontrados registros!\n");
     }
 }
 
@@ -159,6 +162,8 @@ void ordenarEstudantesPelaMatricula(arvore_avl raiz, tabela *tab) {
         printf("================= Lista de Alunos =================\n");
         in_order_avl(raiz, tab);
         printf("\n===================================================\n");
+    } else {
+        printf("Não foram encontrados registros!\n");
     }
 }
 
@@ -167,6 +172,8 @@ void ordenarEstudantesPeloEmail(arvore_rb raiz, tabela *tab) {
         printf("================= Lista de Alunos =================\n");
         in_order_rb(raiz, tab);
         printf("\n===================================================\n");
+    } else {
+        printf("Não foram encontrados registros!\n");
     }
 }
 
