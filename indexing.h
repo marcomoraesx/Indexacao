@@ -157,6 +157,10 @@ void exibir_fila(fila f);
 fila enqueue(fila f, int valor);
 fila dequeue(fila f);
 
+void salvar_arquivo_fila(char *nome, fila f);
+void salvar_auxiliar_fila(fila f, FILE *arq);
+fila carregar_arquivo_fila(char *nome, fila f);
+
 int maior(int a, int b);
 dado * ler_dados();
 void tirar_enter(char *string);

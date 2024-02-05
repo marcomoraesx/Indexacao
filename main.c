@@ -92,6 +92,9 @@ int main(int argc, char * argv[]) {
                         tirar_enter(email);
                         removerEstudantePeloEmail(&tab, &email, tab.indices_email);
                         break;
+                case 11:
+                        exibir_fila(tab.indices_alocacao);
+                        break;
 				case 99:
                         printf("Você saiu da aplicação, até a próxima...\n\n");
 						finalizar(&tab);

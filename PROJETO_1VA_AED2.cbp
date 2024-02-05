@@ -37,6 +37,9 @@
 		<Unit filename="bst.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="fila.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="indexing.c">
 			<Option compilerVar="CC" />
 		</Unit>

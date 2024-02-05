@@ -8,10 +8,12 @@ int inicializarTabela(tabela *tab) {
 	inicializar_bst(tab->indices_cpf);
 	inicializar_avl(tab->indices_matricula);
 	inicializar_rb(&tab->indices_email);
+	inicializar_fila(&tab->indices_alocacao);
 	tab->arquivo_dados = fopen("dados.ext", "a+b");
 	tab->indices_cpf = carregar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
 	tab->indices_matricula = carregar_arquivo_avl("indices_matricula.ext", tab->indices_matricula);
 	tab->indices_email = carregar_arquivo_rb("indices_email.ext", tab->indices_email);
+	tab->indices_alocacao = carregar_arquivo_fila("indices_alocacao.ext", tab->indices_alocacao);
 	if(tab->arquivo_dados != NULL)
 		return 1;
 	else
@@ -23,6 +25,7 @@ void finalizar(tabela *tab) {
 	salvar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
 	salvar_arquivo_avl("indices_matricula.ext", tab->indices_matricula);
 	salvar_arquivo_rb("indices_email.ext", tab->indices_email);
+	salvar_arquivo_fila("indices_alocacao.ext", tab->indices_alocacao);
 }
 
 void adicionarEstudante(tabela *tab, dado *estudante){
@@ -68,6 +71,7 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
+            enqueue(tab->indices_alocacao, registro->dado->indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
         } else {
@@ -87,6 +91,7 @@ void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
+            enqueue(tab->indices_alocacao, registro->dado->indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
         } else {
@@ -106,6 +111,7 @@ void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
+            enqueue(tab->indices_alocacao, registro->dado->indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
         } else {
