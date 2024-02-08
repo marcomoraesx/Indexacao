@@ -8,8 +8,8 @@ int inicializarTabela(tabela *tab) {
 	inicializar_bst(tab->indices_cpf);
 	inicializar_avl(tab->indices_matricula);
 	inicializar_rb(&tab->indices_email);
-	inicializar_fila(&tab->indices_alocacao);
-	tab->arquivo_dados = fopen("dados.ext", "a+b");
+	inicializar_fila(tab->indices_alocacao);
+	tab->arquivo_dados = fopen("dados.ext", "r+");
 	tab->indices_cpf = carregar_arquivo_bst("indices_cpf.ext", tab->indices_cpf);
 	tab->indices_matricula = carregar_arquivo_avl("indices_matricula.ext", tab->indices_matricula);
 	tab->indices_email = carregar_arquivo_rb("indices_email.ext", tab->indices_email);
@@ -34,7 +34,12 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			index_avl * novo_avl = (index_avl *) malloc(sizeof(index_avl));
 			index_rb * novo_rb = (index_rb *) malloc(sizeof(index_rb));
 
-			fseek(tab->arquivo_dados, 0L, SEEK_END);
+			if (tab->indices_alocacao == NULL) {
+                fseek(tab->arquivo_dados, 0L, SEEK_END);
+			} else {
+                fseek(tab->arquivo_dados, tab->indices_alocacao->indice, SEEK_SET);
+                tab->indices_alocacao = dequeue(tab->indices_alocacao);
+			}
 
 			int index = ftell(tab->arquivo_dados) ;
 			//Adicionar indice para CPF
@@ -65,13 +70,14 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
         arvore_bst registro = buscar_bst(raiz, valor);
         if (registro) {
             int caiu = 0;
+            int indice = registro->dado->indice;
             dado * temp = (dado *) malloc (sizeof(dado));
-            fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
+            fseek(tab->arquivo_dados, indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
-            enqueue(tab->indices_alocacao, registro->dado->indice);
+            tab->indices_alocacao = enqueue(tab->indices_alocacao, indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
         } else {
@@ -85,13 +91,14 @@ void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
         arvore_avl registro = buscar_avl(raiz, valor);
         if (registro) {
             int caiu = 0;
+            int indice = registro->dado->indice;
             dado * temp = (dado *) malloc (sizeof(dado));
-            fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
+            fseek(tab->arquivo_dados, indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
-            enqueue(tab->indices_alocacao, registro->dado->indice);
+            tab->indices_alocacao = enqueue(tab->indices_alocacao, indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
         } else {
@@ -105,13 +112,14 @@ void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
         arvore_rb registro = buscar_rb(raiz, valor);
         if (registro) {
             int caiu = 0;
+            int indice = registro->dado->indice;
             dado * temp = (dado *) malloc (sizeof(dado));
-            fseek(tab->arquivo_dados, registro->dado->indice, SEEK_SET);
+            fseek(tab->arquivo_dados, indice, SEEK_SET);
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
             remover_rb(&temp->email, &tab->indices_email);
-            enqueue(tab->indices_alocacao, registro->dado->indice);
+            tab->indices_alocacao = enqueue(tab->indices_alocacao, indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
         } else {

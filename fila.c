@@ -51,7 +51,7 @@ void salvar_arquivo_fila(char *nome, fila f) {
 
 void salvar_auxiliar_fila(fila f, FILE *arq){
 	if(f != NULL) {
-		fwrite(f->indice, sizeof(no_fila), 1, arq);
+		fwrite(f, sizeof(no_fila), 1, arq);
 		salvar_auxiliar_fila(f->proximo, arq);
 	}
 }
