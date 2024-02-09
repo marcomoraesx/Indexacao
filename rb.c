@@ -257,14 +257,14 @@ void in_order_rb(arvore_rb raiz, tabela *tab) {
 	}
 }
 
-void remover_rb(char *valor, arvore_rb *raiz) {
+void remover_rb(char *valor, arvore_rb *raiz, arvore_rb temp) {
     arvore_rb posicao;
-    posicao = *raiz;
+    posicao = temp;
     while (posicao != NULL) {
         if (strcmp(valor, posicao->dado->chave) == 0) {
             if (posicao->esq != NULL && posicao->dir != NULL) {
                 posicao->dado = maior_elemento_rb(posicao->esq);
-                remover_rb(posicao->dado->chave, &(posicao->esq));
+                remover_rb(posicao->dado->chave, raiz, posicao->esq);
                 break;
             }
             //Possui apenas o filho direito
