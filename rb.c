@@ -9,8 +9,6 @@ void inicializar_rb(arvore_rb *raiz) {
     *raiz = NULL;
     no_null = (arvore_rb) malloc(sizeof(struct no_rb));
     no_null->cor = DUPLO_PRETO;
-    //strcpy(no_null->dado->chave, "");
-    //no_null->dado->indice = 0;
     no_null->esq = NULL;
     no_null->dir = NULL;
     no_null->pai = NULL;
@@ -222,6 +220,7 @@ void imprimir_elemento_rb(arvore_rb raiz, tabela * tab) {
         dado * temp = (dado *) malloc (sizeof(dado));
         fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
         fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+        printf("\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
         printf("\nEmail: %s\n", raiz->dado->chave);
         printf("Nome: %s\n", temp->nome);
         printf("Matrícula: %d\n", temp->matricula);

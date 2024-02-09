@@ -35,8 +35,10 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			index_rb * novo_rb = (index_rb *) malloc(sizeof(index_rb));
 
 			if (tab->indices_alocacao == NULL) {
+                printf("Inseriu no fim!");
                 fseek(tab->arquivo_dados, 0L, SEEK_END);
 			} else {
+                printf("Utilizou memoria!");
                 fseek(tab->arquivo_dados, tab->indices_alocacao->indice, SEEK_SET);
                 tab->indices_alocacao = dequeue(tab->indices_alocacao);
 			}
