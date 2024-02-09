@@ -272,6 +272,7 @@ void imprimir_elemento_avl(arvore_avl raiz, tabela * tab) {
         dado * temp = (dado *) malloc (sizeof(dado));
         fseek(tab->arquivo_dados, raiz->dado->indice, SEEK_SET);
         fread(temp, sizeof(dado), 1, tab->arquivo_dados);
+        printf("\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
         printf("\nMatrícula: %d\n", raiz->dado->chave);
         printf("Nome: %s\n", temp->nome);
         printf("CPF: %s\n", temp->cpf);
