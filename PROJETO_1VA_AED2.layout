@@ -2,6 +2,11 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="indexing.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4381" topLine="117" />
+		</Cursor>
+	</File>
 	<File name="main.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2705" topLine="63" />
@@ -12,6 +17,16 @@
 			<Cursor1 position="5653" topLine="120" />
 		</Cursor>
 	</File>
+	<File name="avl.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8618" topLine="176" />
+		</Cursor>
+	</File>
+	<File name="fila.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1057" topLine="28" />
+		</Cursor>
+	</File>
 	<File name="bst.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2353" topLine="48" />
@@ -20,21 +35,6 @@
 	<File name="rb.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="6937" topLine="248" />
-		</Cursor>
-	</File>
-	<File name="indexing.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4381" topLine="117" />
-		</Cursor>
-	</File>
-	<File name="fila.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1057" topLine="28" />
-		</Cursor>
-	</File>
-	<File name="avl.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="8618" topLine="176" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
