@@ -93,6 +93,7 @@ int main(int argc, char * argv[]) {
                         removerEstudantePeloEmail(&tab, &email, tab.indices_email);
                         break;
                 case 11:
+                        printf("Você escolheu ver os indices disponíveis para realocação de memória!\n");
                         exibir_fila(tab.indices_alocacao);
                         break;
 				case 99:
