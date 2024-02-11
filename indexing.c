@@ -35,10 +35,8 @@ void adicionarEstudante(tabela *tab, dado *estudante){
 			index_rb * novo_rb = (index_rb *) malloc(sizeof(index_rb));
 
 			if (tab->indices_alocacao == NULL) {
-                printf("Inseriu no fim!");
                 fseek(tab->arquivo_dados, 0L, SEEK_END);
 			} else {
-                printf("Utilizou memoria!");
                 fseek(tab->arquivo_dados, tab->indices_alocacao->indice, SEEK_SET);
                 tab->indices_alocacao = dequeue(tab->indices_alocacao);
 			}
@@ -78,7 +76,7 @@ void removerEstudantePeloCpf(tabela *tab, char *valor, arvore_bst raiz) {
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
-            remover_rb(&temp->email, &tab->indices_email);
+            remover_rb(&temp->email, &tab->indices_email, tab->indices_email);
             tab->indices_alocacao = enqueue(tab->indices_alocacao, indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
@@ -99,7 +97,7 @@ void removerEstudantePelaMatricula(tabela *tab, int valor, arvore_avl raiz) {
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
-            remover_rb(&temp->email, &tab->indices_email);
+            remover_rb(&temp->email, &tab->indices_email, tab->indices_email);
             tab->indices_alocacao = enqueue(tab->indices_alocacao, indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");
@@ -120,7 +118,7 @@ void removerEstudantePeloEmail(tabela *tab, char *valor, arvore_rb raiz) {
             fread(temp, sizeof(dado), 1, tab->arquivo_dados);
             tab->indices_cpf = remover_bst(&temp->cpf, tab->indices_cpf);
             tab->indices_matricula = remover_avl(tab->indices_matricula, temp->matricula, &caiu);
-            remover_rb(&temp->email, &tab->indices_email);
+            remover_rb(&temp->email, &tab->indices_email, tab->indices_email);
             tab->indices_alocacao = enqueue(tab->indices_alocacao, indice);
             free(temp);
             printf("\nRegistro removido com sucesso!\n");

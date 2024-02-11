@@ -139,7 +139,7 @@ index_rb * maior_elemento_rb(arvore_rb raiz);
 index_rb * menor_elemento_rb(arvore_rb raiz);
 int altura_rb(arvore_rb raiz);
 void retira_duplo_preto(arvore_rb *raiz, arvore_rb elemento);
-void remover_rb(char *valor, arvore_rb *raiz);
+void remover_rb(char *valor, arvore_rb *raiz, arvore_rb temp);
 void reajustar_rb(arvore_rb *raiz, arvore_rb elemento);
 void imprimir_elemento_rb(arvore_rb raiz, tabela * tab);
 void pre_order_rb(arvore_rb raiz, tabela *tab);
