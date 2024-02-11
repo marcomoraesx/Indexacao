@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1707150178 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/main.c
+1707660820 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/main.c
 	<stdio.h>
 	<stdlib.h>
 	"indexing.h"
@@ -11,7 +11,7 @@
 	"indexing.h"
 	<string.h>
 
-1707149861 /home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/indexing.h
+1707661620 /home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/indexing.h
 	<stdio.h>
 
 1705861975 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/teste.c
@@ -21,25 +21,25 @@
 	"indexing.h"
 	<string.h>
 
-1707519169 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/avl.c
+1707660820 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/avl.c
 	"indexing.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1707519164 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/bst.c
+1707660820 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/bst.c
 	"indexing.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1707519382 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/rb.c
+1707661620 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/rb.c
 	"indexing.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1707349938 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/fila.c
+1707660347 source:/home/marco/Faculdade/P3/AED2/PROJETO_1VA_AED2/fila.c
 	<stdio.h>
 	<stdlib.h>
 	"indexing.h"
